@@ -1,0 +1,7 @@
+= Description
+
+GreaseMonkey port of the Chrome HoverZoom plugin (https://chrome.google.com/webstore/detail/nonjdcjchghhkdoolnlbekcfllmednbl).
+
+It's super alpha, but works.
+
+*Only the Imgur plugin is in there, so only imgur links will work right now.*

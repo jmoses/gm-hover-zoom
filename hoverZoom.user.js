@@ -1,5 +1,6 @@
 // ==UserScript==
 // @name gm-hover-zoom
+// @version 0.0.1
 // @include http://*
 // @include https://*
 // @namespace http://github.com/jmoses
@@ -354,7 +355,7 @@ var hoverZoom = {
 		}
 		
 		function displayFullSizeImage() {
-			//hz.imgLoading.remove();
+			hz.imgLoading.remove();
 			hz.imgLoading = null;
 			hz.hzImg.stop(true, true);
 			hz.hzImg.offset({top:-9000, left:-9000});	// hides the image while making it available for size calculations
@@ -846,8 +847,8 @@ var hoverZoom = {
 	
 	// Create and displays the loading image container
 	createImgLoading: function () {
-		//hoverZoom.imgLoading = hoverZoom.imgLoading || $('<img src="' + chrome.extension.getURL('images/loading.gif') + '" style="opacity: 0.8; padding: 0; margin: 0" />');
-		//hoverZoom.imgLoading.appendTo(hoverZoom.hzImg);
+		hoverZoom.imgLoading = hoverZoom.imgLoading || $('<div style="opacity: 0.8; padding: 0; margin: 0">...</div>');
+		hoverZoom.imgLoading.appendTo(hoverZoom.hzImg);
 	},
 	
 	// Preloads zoomed images
