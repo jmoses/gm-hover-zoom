@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name gm-hover-zoom
-// @version 0.0.1
+// @version 0.0.2
 // @include http://*
 // @include https://*
 // @namespace http://github.com/jmoses
@@ -973,10 +973,67 @@ hoverZoomPlugins.push( {
 	}
 });
 
-console.log("imgur loaded");
+// Copyright (c) 2011 Romain Vallet <romain.vallet@gmail.com>
+// Licensed under the MIT license, read license.txt
+
+hoverZoomPlugins.push( {
+	name: 'Tumblr',
+	version: '0.1',
+	prepareImgLinks: function(callback) {
+		var res = [];
+		$('img[src^="http://media.tumblr.com"]').each(function() {
+			var img = $(this),
+				url = img.attr('src'),
+				link = img.parents('a:eq(0)'),
+				width = img.width(),
+				url = url.replace(/_[0-9a-z]*\.(.*)$/, '_maxwidth.$1'),
+				urls = [];
+			link = link.length ? link : img;
+			//if (width < 1280) { urls.push(url.replace('maxwidth', '1280')); }
+			if (width < 500) { urls.push(url.replace('maxwidth', '500')); }
+			if (width < 400) { urls.push(url.replace('maxwidth', '400')); }
+			if (width < 250) { urls.push(url.replace('maxwidth', '250')); }
+			if (width < 128) { urls.push(url.replace('maxwidth', '128')); }
+			if (width < 100) { urls.push(url.replace('maxwidth', '100')); }
+			if (urls.length) {
+				link.data().hoverZoomSrc = urls;
+				res.push(link);
+			}
+		});
+		hoverZoom.urlReplace(res, 
+			'a[href*="tumblr.com/photo/"]',
+			'',
+			''
+		);		
+		callback($(res));
+	}
+});
+
+// Copyright (c) 2011 Romain Vallet <romain.vallet@gmail.com>
+// Licensed under the MIT license, read license.txt
+
+hoverZoomPlugins.push( {
+	name: 'Default',
+	version: '0.5',
+	prepareImgLinks: function(callback) {
+		var res = [];
+		$('a[href]').filter(function() {
+			return this.href.match(/\/[^:]+\.(?:jpe?g|gif|png|svg|webp|bmp|ico|xbm)(?:[\?#].*)?$/i);
+		}).each(function() {
+			var _this = $(this), data = _this.data();
+			if (!data.hoverZoomSrc) {
+				data.hoverZoomSrc = [this.href];
+				res.push(_this);
+			}
+		});
+		callback($(res));	
+	}
+});
+
+
+
 hoverZoom.loadHoverZoom();
 
-console.log("HZ loaded.");
 
 // imgur_a.js
 
