@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name GM HoverZoom Port
+// @name gm-hover-zoom
 // @include http://*
 // @include https://*
-// @namespace http://burningbush.us/hoverzoom
+// @namespace http://github.com/jmoses
 // @require http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js
 // @require http://documentcloud.github.com/underscore/underscore-min.js
 // @require http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js
